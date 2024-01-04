@@ -68,12 +68,32 @@ int pop_first(Item ** list)
     return pop_val;
 }
 
-void print_list(Item * head) {
-    Item * current = head;
-    while (current != NULL) {
+void print_list(Item * list) 
+{
+    Item * current = list;
+    while (current != NULL) 
+    {
         printf("key: %d -> val: %d\n", current->key, current->val);
         current = current->next;
     }
+}
+
+int find_key(Item * list, int key)
+{
+    Item * current = list;
+    if (current->key == key)
+    {
+        return current->val;
+    }
+    while (current->next != NULL)
+    {
+        if (current->key == key)
+        {
+            return current->val;
+        }
+        current = current->next;
+    }
+    return -1;
 }
 
 int main()
@@ -92,5 +112,6 @@ int main()
     print_list(list);
     printf("pop last: %d\n",pop_last(list));
     print_list(list);
+    printf("%d",find_key(list,4));
     return 0;
 }
