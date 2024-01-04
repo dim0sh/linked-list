@@ -8,17 +8,26 @@ typedef struct Item
     struct Item * next;
 } Item;
 
-Item * new()
+void init_empty(Item ** list)
 {
-    Item * root = NULL;
-    root = (Item *) malloc(sizeof(Item));
-    return root;
+    Item * root = (Item *) malloc(sizeof(Item));
+    root = NULL;
+    *list = root;
+}
+
+void push_begin(Item ** list, int key, int val)
+{
+    Item * new = (Item *) malloc(sizeof(Item));
+    new->key = key;
+    new->val = val;
+    new->next = *list;
+    *list = new;
 }
 
 void push_end(Item * list, int key, int val)
 {
     Item * current = list;
-    if (current->next != NULL)
+    while (current->next != NULL)
     {
         current = current->next;
     }
@@ -45,15 +54,6 @@ void delete_key(Item ** list, int key)
         }
         current = current->next;
     }
-}
-
-void push_begin(Item ** list, int key, int val)
-{
-    Item * new = (Item *) malloc(sizeof(Item));
-    new->key = key;
-    new->val = val;
-    new->next = *list;
-    *list = new;
 }
 
 int pop_last(Item * list)
@@ -113,15 +113,11 @@ int find_key(Item * list, int key)
 
 int main()
 {
-    Item * list = (Item *) malloc(sizeof(Item));
-    list->val = 9;
-    list->key = 4;
-    list->next = malloc(sizeof(Item));
-    list->next = NULL;
+    Item * list;
+    init_empty(&list);
+    push_begin(&list,23,89);
     push_end(list,8,29);
-    // printf("%d",find(&list,8));
     push_begin(&list,1,30);
-
     print_list(list);
     printf("pop first: %d\n",pop_first(&list));
     print_list(list);
