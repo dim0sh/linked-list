@@ -28,6 +28,25 @@ void push_end(Item * list, int key, int val)
     current->next->next = NULL;
 }
 
+void delete_key(Item ** list, int key)
+{
+    Item * current = *list;
+    if (current->key == key)
+    {
+        *list = current->next;
+        return;
+    }
+    while (current->next != NULL)
+    {
+        if (current->next->key == key)
+        {
+            current->next = current->next->next;
+            return;
+        }
+        current = current->next;
+    }
+}
+
 void push_begin(Item ** list, int key, int val)
 {
     Item * new = (Item *) malloc(sizeof(Item));
@@ -108,6 +127,17 @@ int main()
     print_list(list);
     printf("pop last: %d\n",pop_last(list));
     print_list(list);
-    printf("%d",find_key(list,4));
+    printf("%d\n",find_key(list,4));
+    push_begin(&list,3,9);
+    print_list(list);
+    delete_key(&list,4);
+    printf("delete 4\n");
+    print_list(list);
+    push_end(list,5,7);
+    printf("push end 5,7\n");
+    print_list(list);
+    delete_key(&list,3);
+    printf("delete 3\n");
+    print_list(list);
     return 0;
 }
