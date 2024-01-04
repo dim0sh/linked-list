@@ -11,15 +11,15 @@ typedef struct Item
     int key;
     int val;
     struct Item * next;
-} Item;
+} item_t;
 /**
 * Initializes an empty list.
 * @code Example: Item list; init_empty(&list);
 * @param Item
 */
-void init_empty(Item ** list)
+void init_empty(item_t ** list)
 {
-    Item * root = (Item *) malloc(sizeof(Item));
+    item_t * root = (item_t *) malloc(sizeof(item_t));
     root = NULL;
     *list = root;
 }
@@ -29,9 +29,9 @@ void init_empty(Item ** list)
 * @param int key
 * @param int val
 */
-void push_begin(Item ** list, int key, int val)
+void push_begin(item_t ** list, int key, int val)
 {
-    Item * new = (Item *) malloc(sizeof(Item));
+    item_t * new = (item_t *) malloc(sizeof(item_t));
     new->key = key;
     new->val = val;
     new->next = *list;
@@ -43,14 +43,14 @@ void push_begin(Item ** list, int key, int val)
 * @param int key
 * @param int val
 */
-void push_end(Item * list, int key, int val)
+void push_end(item_t * list, int key, int val)
 {
-    Item * current = list;
+    item_t * current = list;
     while (current->next != NULL)
     {
         current = current->next;
     }
-    current->next = (Item *) malloc(sizeof(Item));
+    current->next = (item_t *) malloc(sizeof(item_t));
     current->next->key = key;
     current->next->val = val;
     current->next->next = NULL;
@@ -61,9 +61,9 @@ void push_end(Item * list, int key, int val)
 * @param Item list
 * @param int key
 */
-void delete_key(Item ** list, int key)
+void delete_key(item_t ** list, int key)
 {
-    Item * current = *list;
+    item_t * current = *list;
     if (current->key == key)
     {
         *list = current->next;
@@ -83,10 +83,10 @@ void delete_key(Item ** list, int key)
 * remove last item and return val
 * @param Item list
 */
-int pop_last(Item * list)
+int pop_last(item_t * list)
 {
     int pop_val = -1;
-    Item * current = list;
+    item_t * current = list;
     if (list == NULL)
     {
         return pop_val;
@@ -103,10 +103,10 @@ int pop_last(Item * list)
 * remove first item and return val.
 * @param Item list
 */
-int pop_first(Item ** list)
+int pop_first(item_t ** list)
 {
     int pop_val = -1;
-    Item * next = NULL;
+    item_t * next = NULL;
     if (*list == NULL)
     {
         return pop_val;
@@ -120,9 +120,9 @@ int pop_first(Item ** list)
 * print list to console
 * @param Item list
 */
-void print_list(Item * list) 
+void print_list(item_t * list) 
 {
-    Item * current = list;
+    item_t * current = list;
     while (current != NULL) 
     {
         printf("key: %d -> val: %d\n", current->key, current->val);
@@ -134,9 +134,9 @@ void print_list(Item * list)
 * @param Item list
 * @param int key
 */
-int find_key(Item * list, int key)
+int find_key(item_t * list, int key)
 {
-    Item * current = list;
+    item_t * current = list;
     while (current != NULL)
     {
         if (current->key == key)
@@ -150,7 +150,7 @@ int find_key(Item * list, int key)
 
 int main()
 {
-    Item * list;
+    item_t * list;
     init_empty(&list);
     push_begin(&list,23,89);
     push_end(list,8,29);
