@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/**
+* Linked list item
+* @param int key
+* @param int val
+* @param Item next
+*/
 typedef struct Item
 {
     int key;
@@ -111,7 +116,10 @@ int pop_first(Item ** list)
     *list = next;
     return pop_val;
 }
-
+/**
+* print list to console
+* @param Item list
+*/
 void print_list(Item * list) 
 {
     Item * current = list;
