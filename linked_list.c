@@ -81,11 +81,7 @@ void print_list(Item * list)
 int find_key(Item * list, int key)
 {
     Item * current = list;
-    if (current->key == key)
-    {
-        return current->val;
-    }
-    while (current->next != NULL)
+    while (current != NULL)
     {
         if (current->key == key)
         {
