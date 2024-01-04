@@ -7,14 +7,23 @@ typedef struct Item
     int val;
     struct Item * next;
 } Item;
-
+/**
+* Initializes an empty list.
+* @code Example: Item list; init_empty(&list);
+* @param Item
+*/
 void init_empty(Item ** list)
 {
     Item * root = (Item *) malloc(sizeof(Item));
     root = NULL;
     *list = root;
 }
-
+/**
+* add item at begining of list
+* @param Item list
+* @param int key
+* @param int val
+*/
 void push_begin(Item ** list, int key, int val)
 {
     Item * new = (Item *) malloc(sizeof(Item));
@@ -23,7 +32,12 @@ void push_begin(Item ** list, int key, int val)
     new->next = *list;
     *list = new;
 }
-
+/**
+* add item at end of list
+* @param Item list
+* @param int key
+* @param int val
+*/
 void push_end(Item * list, int key, int val)
 {
     Item * current = list;
@@ -35,8 +49,13 @@ void push_end(Item * list, int key, int val)
     current->next->key = key;
     current->next->val = val;
     current->next->next = NULL;
+    return;    
 }
-
+/**
+* delte item with key out of list.
+* @param Item list
+* @param int key
+*/
 void delete_key(Item ** list, int key)
 {
     Item * current = *list;
@@ -55,7 +74,10 @@ void delete_key(Item ** list, int key)
         current = current->next;
     }
 }
-
+/**
+* remove last item and return val
+* @param Item list
+*/
 int pop_last(Item * list)
 {
     int pop_val = -1;
@@ -72,7 +94,10 @@ int pop_last(Item * list)
     current->next = NULL;
     return pop_val;
 }
-
+/**
+* remove first item and return val.
+* @param Item list
+*/
 int pop_first(Item ** list)
 {
     int pop_val = -1;
@@ -96,7 +121,11 @@ void print_list(Item * list)
         current = current->next;
     }
 }
-
+/**
+* find item with key in list and return val.
+* @param Item list
+* @param int key
+*/
 int find_key(Item * list, int key)
 {
     Item * current = list;
