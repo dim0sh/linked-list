@@ -147,6 +147,23 @@ int find_key(item_t * list, int key)
     }
     return -1;
 }
+/**
+* free memory of linked list
+* @param item_t list
+*/
+void destroy_linked_list(item_t * item)
+{
+    item_t * current = item;
+    item_t * tmp;
+    while(current->next != NULL)
+    {
+        tmp = current;
+        current = current->next;
+        free(tmp);
+        return;
+    }
+    free(item);
+}
 
 int main()
 {
@@ -172,5 +189,6 @@ int main()
     delete_key(&list,3);
     printf("delete 3\n");
     print_list(list);
+    destroy_linked_list(list);
     return 0;
 }
